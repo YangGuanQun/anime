@@ -4,3 +4,7 @@
 [v-cloak] {
     display: none;
 }
+
+a{
+    cursor: pointer;
+}
