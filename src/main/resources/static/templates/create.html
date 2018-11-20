@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/service/aniService.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+名称：<input id="name" type="text" /><br />
+状态：<select id="finState">
+		<option value="0">连载</option>
+		<option value="1">完结</option>
+        <option value="2">未播出</option>
+</select><br />
+追番：<select id="watchState">
+    <option value="0">尚未观看</option>
+    <option value="1">追番中</option>
+    <option value="2">已看完</option>
+</select><br />
+星期：<select id="day">
+    <option value=""></option>
+    <option value="1">一</option>
+    <option value="2">二</option>
+    <option value="3">三</option>
+    <option value="4">四</option>
+    <option value="5">五</option>
+    <option value="6">六</option>
+    <option value="7">日</option>
+</select><br/>
+
+集数：<input id="episodeNum" type="text"/><br />
+时期：<input id="period" type="text"/><br />
+资源：<input id="url" type="text"/><br/>
+简介：<textarea id="info"></textarea><br/>
+<button onclick="create();">提交</button>
+<script>
+	var create = function(){
+		var _ani = {
+			name:$('#name').val(),
+			finState:$('#finState').val(),
+            watchState:$('#watchState').val(),
+			episodeNum:$('#episodeNum').val(),
+			period:$('#period').val(),
+			url:$('#url').val(),
+			info:$('#info').val(),
+            day:$('#day').val()
+		};
+		console.log(_ani);
+		AniUtil.addAni(_ani,function(){
+            top.frames.main.src = 'templates/list.html';
+		},function(){
+			alert('fail');
+		})
+	}
+</script>
+</body>
+</html>

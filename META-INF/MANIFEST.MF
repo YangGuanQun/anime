@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: anime
+Bundle-SymbolicName: anime
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.anime,
+ com.anime.bean,
+ com.anime.constant,
+ com.anime.controller,
+ com.anime.dao,
+ com.anime.exception,
+ com.anime.msg.common,
+ com.anime.msg.req,
+ com.anime.msg.rsp,
+ com.anime.service,
+ com.anime.service.impl

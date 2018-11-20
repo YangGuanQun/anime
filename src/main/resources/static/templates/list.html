@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../css/global.css"/>
+    <script type="text/javascript" src="../js/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/lib/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script type="text/javascript" src="../js/service/aniService.js"></script>
+</head>
+<body oncontextmenu="self.event.returnValue=false">
+<div id="app" v-cloak>
+    <table class="table">
+        <colgroup>
+            <col width="10%">
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <tr v-bind:class="{'activate':0==ani.watchState,'warning':1==ani.watchState,'success':2==ani.watchState}"
+            v-for="ani in aniList" data-toggle="context" data-target="#context-menu" @mousedown="ani.watchState!==2&&trRightClick(ani.id, $event)">
+            <td class="text-center">{{ani.createTimeStr}}</td>
+            <td :title="ani.info">{{ani.name}}</td>
+            <td class="text-center" v-if="ani.finState==0">{{'连载至 ' + ani.episodeNum + ' 话'}}</td>
+            <td class="text-center" v-else>{{'完结 ' + ani.episodeNum + ' 话'}}</td>
+            <td class="text-center">
+                <a :href="ani.url">资源</a>
+            </td>
+            <td><a @click="ani.watchState!==2&&trRightClick(ani.id, $event, true)">操作</a></td>
+        </tr>
+    </table>
+
+    <!-- 右键菜单 -->
+    <div id="context-menu" v-show="contextMenuFlag" style="position: absolute;width: 100px;height: 50px;cursor: pointer">
+        <ul class="list-group" role="menu">
+            <li class="list-group-item" onclick="plusOne()">+1</li>
+            <li class="list-group-item" onclick="markFinState()">标记完结</li>
+            <li class="list-group-item" onclick="markWatchState()">标记看完</li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/controllers/list.js"></script>
+</body>
+</html>
