@@ -15,14 +15,14 @@
 	</select>
 
 	<insert id="insertAni" parameterType="com.anime.bean.Ani">
-		insert into ani.t_ani (
+		insert into t_ani (
 		<include refid="AniCols"></include>
 		)
 		values(#{id},now(),#{episodeNum},#{info},#{name},#{period},#{finState},#{watchState},#{day},#{url},#{flag},now());
 	</insert>
 
 	<update id="deleteAni" parameterType="int">
-		update ani.t_ani set flag=-1 where id in
+		update t_ani set flag=-1 where id in
 		<foreach collection="array" item="item" open="(" close=")"
 			separator=",">
 			#{item}
@@ -30,7 +30,7 @@
 	</update>
 
 	<update id="updateAni" parameterType="com.anime.bean.Ani">
-		update ani.t_ani
+		update t_ani
 		<set>
 
 			<if test="createTime != null">
@@ -69,7 +69,7 @@
 
 	<select id="selectNextId" resultType="int">
 		select max(id)+1 from
-		ani.t_ani;
+		t_ani;
 	</select>
 
 	<select id="selectAniByPage"
@@ -77,7 +77,7 @@
 		resultType="com.anime.bean.Ani">
 		select
 		<include refid="AniCols"></include>
-		from ani.t_ani
+		from t_ani
 		<where>
 			1=1
 			<if test="ani != null">
@@ -120,11 +120,11 @@
 	</select>
 
 	<update id="plusOne" parameterType="com.anime.bean.Ani">
-		update ani.t_ani set
+		update t_ani set
 		episode_num = episode_num + 1 where id = #{id}
 	</update>
 	
 	<select id="total" resultType="int">
-		select sum(episode_num) from ani.t_ani;
+		select sum(episode_num) from t_ani;
 	</select>
 </mapper>
