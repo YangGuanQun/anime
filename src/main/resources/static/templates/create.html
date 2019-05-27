@@ -30,6 +30,7 @@
 </select><br/>
 
 集数：<input id="episodeNum" type="text"/><br />
+起始：<input id="startWith" type="text"/><br />
 时期：<input id="period" type="text"/><br />
 资源：<input id="url" type="text"/><br/>
 简介：<textarea id="info"></textarea><br/>
@@ -44,7 +45,8 @@
 			period:$('#period').val(),
 			url:$('#url').val(),
 			info:$('#info').val(),
-            day:$('#day').val()
+            day:$('#day').val(),
+            startWith:$('#startWith').val()
 		};
 		console.log(_ani);
 		AniUtil.addAni(_ani,function(){

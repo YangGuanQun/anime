@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.anime.dao.AniDao">
 	<sql id="AniCols">
-		id,create_time,episode_num,info,name,period,fin_state,watch_state,day,url,flag,update_time
+		id,create_time,episode_num,info,name,period,fin_state,watch_state,day,url,flag,update_time,start_with
 	</sql>
 
 	<select id="selectAniById" resultType="com.anime.bean.Ani">
@@ -18,7 +18,7 @@
 		insert into t_ani (
 		<include refid="AniCols"></include>
 		)
-		values(#{id},now(),#{episodeNum},#{info},#{name},#{period},#{finState},#{watchState},#{day},#{url},#{flag},now());
+		values(#{id},now(),#{episodeNum},#{info},#{name},#{period},#{finState},#{watchState},#{day},#{url},#{flag},now(),#{startWith});
 	</insert>
 
 	<update id="deleteAni" parameterType="int">
@@ -125,6 +125,6 @@
 	</update>
 	
 	<select id="total" resultType="int">
-		select sum(episode_num) from t_ani;
+		select sum(episode_num-start_with) from t_ani;
 	</select>
 </mapper>

@@ -33,7 +33,9 @@ public class Ani implements Serializable{
 	private String url;
 	
 	private Integer flag;
-	
+
+	private Integer startWith;
+
 	public String getCreateTimeStr() {
 		return DateUtil.dateToSmartString(getCreateTime());
 	}
@@ -138,36 +140,31 @@ public class Ani implements Serializable{
 		this.updateTime = updateTime;
 	}
 
+	public Integer getStartWith() {
+		return startWith;
+	}
+
+	public void setStartWith(Integer startWith) {
+		this.startWith = startWith;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Ani [id=");
-		builder.append(id);
-		builder.append(", createTime=");
-		builder.append(createTime);
-		builder.append(", updateTime=");
-		builder.append(updateTime);
-		builder.append(", episodeNum=");
-		builder.append(episodeNum);
-		builder.append(", info=");
-		builder.append(info);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", period=");
-		builder.append(period);
-		builder.append(", finState=");
-		builder.append(finState);
-		builder.append(", watchState=");
-		builder.append(watchState);
-		builder.append(", day=");
-		builder.append(day);
-		builder.append(", url=");
-		builder.append(url);
-		builder.append(", flag=");
-		builder.append(flag);
-		builder.append("]");
-		return builder.toString();
+		final StringBuilder sb = new StringBuilder("Ani{");
+		sb.append("id=").append(id);
+		sb.append(", createTime=").append(createTime);
+		sb.append(", updateTime=").append(updateTime);
+		sb.append(", episodeNum=").append(episodeNum);
+		sb.append(", info='").append(info).append('\'');
+		sb.append(", name='").append(name).append('\'');
+		sb.append(", period='").append(period).append('\'');
+		sb.append(", finState=").append(finState);
+		sb.append(", watchState=").append(watchState);
+		sb.append(", day=").append(day);
+		sb.append(", url='").append(url).append('\'');
+		sb.append(", flag=").append(flag);
+		sb.append(", startWith=").append(startWith);
+		sb.append('}');
+		return sb.toString();
 	}
-	
-	
 }
