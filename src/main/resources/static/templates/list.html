@@ -24,8 +24,7 @@
             v-for="ani in aniList" data-toggle="context" data-target="#context-menu" @mousedown="ani.watchState!==2&&trRightClick(ani.id, $event)">
             <td class="text-center">{{ani.createTimeStr}}</td>
             <td :title="ani.info">{{ani.name}}</td>
-            <td class="text-center" v-if="ani.finState==0">{{'连载至 ' + ani.episodeNum + ' 话'}}</td>
-            <td class="text-center" v-else>{{'完结 ' + ani.episodeNum + ' 话'}}</td>
+            <td class="text-center">{{getStateContent(ani)}}</td>
             <td class="text-center">
                 <a :href="ani.url">资源</a>
             </td>
@@ -38,7 +37,8 @@
         <ul class="list-group" role="menu">
             <li class="list-group-item" onclick="plusOne()">+1</li>
             <li class="list-group-item" onclick="markFinState()">标记完结</li>
-            <li class="list-group-item" onclick="markWatchState()">标记看完</li>
+            <li class="list-group-item" onclick="markWatchState(AniUtil.WATCH_STATE.WATCH_STATE_FINISH)">标记看完</li>
+            <li class="list-group-item" onclick="markWatchState(AniUtil.WATCH_STATE.WATCH_STATE_ABANDONED)">弃</li>
         </ul>
     </div>
 </div>

@@ -30,5 +30,10 @@ public interface StateConstant {
 	 * 看完
 	 */
 	public final int WATCH_FLAG_FINISH = 2;
+
+	/*
+	 * 弃
+	 */
+	public final int WATCH_FLAG_ABANDONED = 3;
 	
 }

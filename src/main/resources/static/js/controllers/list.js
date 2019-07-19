@@ -51,8 +51,34 @@ var app = new Vue({
             app.currentFoucsRowId = id;
             if (isOper || 2 === event.button) {
                 app.contextMenuFlag = true;
-                $('#context-menu').css({"left": event.clientX, "top": event.clientY})
+                $('#context-menu').css({"left": event.clientX, "top": event.clientY + document.documentElement.scrollTop})
             }
+        },
+        getStateContent :function (ani) {
+            if (ani.finState === AniUtil.FIN_STATE.FIN_STATE_COMING) {
+                return "尚未播出";
+            } else if (ani.finState === AniUtil.FIN_STATE.FIN_STATE_FIN) {
+                if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_FINISH) {
+                    return "完结 " + ani.episodeNum + " 话";
+                } else if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_BEFORE) {
+                    return "已完结 尚未观看"
+                } else if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_CHASING) {
+                    return "完结 观看至 " + ani.episodeNum + " 话";
+                } else if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_ABANDONED) {
+                    return "已弃 观看至 " + ani.episodeNum + " 话";
+                }
+            } else if (ani.finState === AniUtil.FIN_STATE.FIN_STATE_UN_FIN) {
+                if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_FINISH) {
+                    return "观看至 " + ani.episodeNum + " 话";
+                } else if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_BEFORE) {
+                    return "尚未观看"
+                } else if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_CHASING) {
+                    return "观看至 " + ani.episodeNum + " 话";
+                } else if (ani.watchState === AniUtil.WATCH_STATE.WATCH_STATE_ABANDONED) {
+                    return "已弃 观看至 " + ani.episodeNum + " 话";
+                }
+            }
+            return ani.episodeNum;
         }
     }
 });
@@ -76,14 +102,14 @@ var markFinState = function () {
         alert("failed");
     });
 };
-var markWatchState = function () {
+var markWatchState = function (state) {
     var _request = {
         id:app.currentFoucsRowId,
-        watchState:AniUtil.WATCH_STATE.WATCH_STATE_FINISH
+        watchState:state
     };
     AniUtil.modifyAni(_request,function(){
         queryByPage();
     },function(){
         alert("failed");
     });
-}
+};
